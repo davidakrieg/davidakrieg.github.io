@@ -6,6 +6,7 @@ import scala.scalajs.js.annotation.JSName
 trait PleaseStatic extends js.Object {
   def make_color():js.Any = js.native
   def make_color(options:MakeColorOpts):js.Any = js.native
+  def make_color(options:js.Dynamic):js.Any = js.native
   def make_scheme(baseColor:HSV):Array[js.Any] = js.native
   def make_scheme(baseColor:HSV, options:MakeSchemeOpts):Array[js.Any] = js.native
 }

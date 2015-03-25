@@ -12,5 +12,9 @@ object HomeTest extends TestSuite {
       assert(square(4) == 16)
       assert(square(-5) == 25)
     }
+
+    'HomePlease {
+      assert(please().startsWith("#"))
+    }
   }
 }

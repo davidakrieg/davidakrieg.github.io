@@ -13,6 +13,11 @@ persistLauncher in Test := false
 
 testFrameworks += new TestFramework("utest.runner.Framework")
 
+jsDependencies += ProvidedJS / "Please.js"
+
+skip in packageJSDependencies := false
+jsDependencies += RuntimeDOM
+
 libraryDependencies ++= Seq(
     "org.scala-js" %%% "scalajs-dom" % "0.8.0",
     "com.lihaoyi" %%% "utest" % "0.3.0" % "test"

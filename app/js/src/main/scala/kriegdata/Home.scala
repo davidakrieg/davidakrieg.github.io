@@ -24,8 +24,8 @@ object Home extends js.JSApp {
   def maybeChangeColor(index: js.Any, thiz:dom.Element):js.Any = {
     val thisRand = rand.nextInt()
     if(thisRand % 7 == 0 || thisRand % 11 == 0){
-      //jQuery(thiz).animate(js.Dynamic.literal(`background-color` = please), 500)//, "flip")
-      jQuery(thiz).css("background-color", please)
+      jQuery(thiz).animate(js.Dynamic.literal("background-color" -> please), "slow")//Backticks don't work for CSS properties
+      //jQuery(thiz).css("background-color", please)
     }
     index
   }

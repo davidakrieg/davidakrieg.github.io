@@ -2,7 +2,7 @@ package kriegdata
 
 import scala.annotation.tailrec
 import scala.scalajs.js
-import scala.scalajs.
+import org.scalajs.jquery._
 import js.annotation.JSExport
 import org.scalajs.dom
 import org.scalajs.dom.{Node, NodeList}
@@ -12,50 +12,44 @@ import scala.util.Random
 
 object Home extends js.JSApp {
   val ROWS = 16
-  val COLS = 8
-  val rand = new Random()
+  val COLS = 16
+  val rand = new Random(scala.compat.Platform.currentTime)
 
   def main(): Unit = {
-    dom.document.body.style.backgroundColor = please()
-    fillPlayground()
-    dom.window.setTimeout(doRedraw, 100)
+    jQuery(dom.document.body).css("background-color", please)
+    jQuery(".jumbotron").css("background-color", please)
+    dom.setInterval(fillPlayground _, 100)
   }
 
-  def doRedraw: Function0[Unit] = () => {
-    dom.window.setTimeout(doRedraw, 100)
-    fillPlayground()
+  def maybeChangeColor(index: js.Any, thiz:dom.Element):js.Any = {
+    val thisRand = rand.nextInt()
+    if(thisRand % 7 == 0 || thisRand % 11 == 0){
+      //jQuery(thiz).animate(js.Dynamic.literal(`background-color` = please), 500)//, "flip")
+      jQuery(thiz).css("background-color", please)
+    }
+    index
+  }
+
+  def drawRow(index:js.Any, thiz:dom.Element):js.Any = {
+    if(jQuery(thiz).children().length >= COLS)
+      jQuery(thiz).children(".cell").each(maybeChangeColor _)
+    else {
+      for(i <- 0 to COLS) {
+        jQuery(thiz).append(newNode)
+      }
+    }
+  }
+
+  def newNode() = {
+    val returnVal = jQuery("<div/>")
+    returnVal.addClass("col-lg-9 cell img-rounded")
+    returnVal.css("background-color", please)
+    returnVal
   }
 
   def fillPlayground() = {
-    @tailrec
-    def changeNodes(n:Node):Unit = {
-      if(n != null){
-        val r = rand.nextInt();
-        if(r % 7 == 0 || r % 11 == 0){
-          val parent = n.parentNode
-          parent.removeChild(n)
-          parent.appendChild(newNode)
-        }
-        changeNodes(n.nextSibling)
-      }
-    }
-    def newNode() = {
-      val returnVal = jQuery
-      dom.document.createElement("div")
-      returnVal.setAttribute("class", "one box eighths")
-      returnVal.setAttribute("style", "background-color: %s;".format(please))
-      returnVal
-    }
-    val playgroundRows:NodeList = dom.document.getElementById("playground").getElementsByClassName("row")
-    for(row <- 0 until playgroundRows.length) {
-      if(playgroundRows(row).hasChildNodes()){
-        changeNodes(playgroundRows(row).firstChild)
-      } else {
-        for(i <- 0 until 16) {
-          playgroundRows(row).appendChild(newNode)
-        }
-      }
-    }
+    val playgroundRows = jQuery("#playground").children(".row")
+    playgroundRows.each(drawRow _)
   }
 
   /** Computes the square of an integer.

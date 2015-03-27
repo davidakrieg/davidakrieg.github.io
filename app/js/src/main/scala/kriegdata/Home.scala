@@ -12,7 +12,7 @@ import scala.util.Random
 
 object Home extends js.JSApp {
   val ROWS = 16
-  val COLS = 16
+  val COLS = 11
   val rand = new Random(scala.compat.Platform.currentTime)
 
   def main(): Unit = {
@@ -34,7 +34,7 @@ object Home extends js.JSApp {
     if(jQuery(thiz).children().length >= COLS)
       jQuery(thiz).children(".cell").each(maybeChangeColor _)
     else {
-      for(i <- 0 to COLS) {
+      for(i <- 0 until COLS) {
         jQuery(thiz).append(newNode)
       }
     }
@@ -42,7 +42,7 @@ object Home extends js.JSApp {
 
   def newNode() = {
     val returnVal = jQuery("<div/>")
-    returnVal.addClass("col-lg-9 cell img-rounded")
+    returnVal.addClass("col-lg-1 cell img-rounded")
     returnVal.css("background-color", please)
     returnVal
   }

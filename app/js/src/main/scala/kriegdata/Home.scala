@@ -42,7 +42,7 @@ object Home extends js.JSApp {
 
   def newNode() = {
     val returnVal = jQuery("<div/>")
-    returnVal.addClass("col-lg-1 well-lg cell")
+    returnVal.addClass("col-lg-1 well-lg cell tada")
     returnVal.css("background-color", please)
     returnVal
   }

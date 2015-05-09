@@ -16,18 +16,25 @@ object Home extends js.JSApp {
   val rand = new Random(scala.compat.Platform.currentTime)
 
   def main(): Unit = {
-    jQuery(dom.document.body).css("background-color", please)
-    jQuery(".jumbotron").css("background-color", please)
-    dom.setInterval(fillPlayground _, 100)
+    val selected = dom.document.location.hash.substring(1)
+    jQuery("#base-color-picker").value(selected)
+    jQuery("#base-color-picker").change(updateBackground _).trigger("change")
+    dom.setInterval(fillPlayground _, 150)
   }
 
   def maybeChangeColor(index: js.Any, thiz:dom.Element):js.Any = {
     val thisRand = rand.nextInt()
     if(thisRand % 7 == 0 || thisRand % 11 == 0){
-      jQuery(thiz).animate(js.Dynamic.literal("background-color" -> please), "slow")//Backticks don't work for CSS properties
+      jQuery(thiz).animate(js.Dynamic.literal("background-color" -> please))//Backticks don't work for CSS properties
       //jQuery(thiz).css("background-color", please)
     }
     index
+  }
+
+  def updateBackground():Unit = {
+    dom.document.location.hash = "#" + getBaseColor
+    jQuery(dom.document.body).animate(js.Dynamic.literal("background-color" -> please))
+    jQuery(".jumbotron").animate(js.Dynamic.literal("background-color" -> please))
   }
 
   def drawRow(index:js.Any, thiz:dom.Element):js.Any = {
@@ -43,9 +50,11 @@ object Home extends js.JSApp {
   def newNode() = {
     val returnVal = jQuery("<div/>")
     returnVal.addClass("col-lg-1 well-lg cell tada")
-    returnVal.css("background-color", please)
+    val color = please()
+    returnVal.css("background-color", color)
     returnVal
   }
+
 
   def fillPlayground() = {
     val playgroundRows = jQuery("#playground").children(".row")
@@ -57,5 +66,16 @@ object Home extends js.JSApp {
    */
   def square(x: Int): Int = x*x
 
-  def please():String = Please.make_color().toString
+  def please():String = {
+    val base = getBaseColor()
+    please(base)
+  }
+
+  def please(base:String):String = Please.make_color(js.Dynamic.literal("base_color" -> base)).toString
+
+  def getBaseColor():String = {
+    if (jQuery("#base-color-picker").value != null)
+      jQuery("#base-color-picker").value.toString
+    else ""
+  }
 }

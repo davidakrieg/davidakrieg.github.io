@@ -19,6 +19,7 @@ val app = crossProject.settings(
     "org.webjars" % "animate.css" % "3.2.5",
     "org.scala-js" %%% "scalajs-dom" % "0.8.0",
     "be.doeraene" %%% "scalajs-jquery" % "0.8.0",
+    "org.spaced.scalajs" %%% "scalajs-d3" % "0.1-SNAPSHOT",
     "com.lihaoyi" %%% "utest" % "0.3.0" % "test"
   ),
   testFrameworks += new TestFramework("utest.runner.Framework"),

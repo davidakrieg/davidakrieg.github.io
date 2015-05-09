@@ -1184,6 +1184,9 @@ $c_jl_System$.prototype.init___ = (function() {
   this.getHighPrecisionTime$1 = jsx$1;
   return this
 });
+$c_jl_System$.prototype.currentTimeMillis__J = (function() {
+  return $m_sjsr_RuntimeLong$().fromDouble__D__sjsr_RuntimeLong($uD(new $g["Date"]()["getTime"]()))
+});
 var $d_jl_System$ = new $ClassTypeData({
   jl_System$: 0
 }, false, "java.lang.System$", {
@@ -2913,121 +2916,86 @@ $h_Lkriegdata_Home$.prototype = $c_Lkriegdata_Home$.prototype;
 $c_Lkriegdata_Home$.prototype.init___ = (function() {
   $n_Lkriegdata_Home$ = this;
   this.ROWS$1 = 16;
-  this.COLS$1 = 8;
-  this.rand$1 = new $c_s_util_Random().init___();
+  this.COLS$1 = 11;
+  this.rand$1 = new $c_s_util_Random().init___J($m_jl_System$().currentTimeMillis__J());
   return this
 });
-$c_Lkriegdata_Home$.prototype.doRedraw__F0 = (function() {
-  return new $c_sjsr_AnonFunction0().init___sjs_js_Function0((function() {
-    $g["window"]["setTimeout"]((function(f) {
-      return (function() {
-        return f.apply__O()
-      })
-    })($m_Lkriegdata_Home$().doRedraw__F0()), 100.0);
-    $m_Lkriegdata_Home$().fillPlayground__V()
-  }))
+$c_Lkriegdata_Home$.prototype.getBaseColor__T = (function() {
+  return $objectToString((0, $g["jQuery"])("#base-color-picker")["val"]())
 });
-$c_Lkriegdata_Home$.prototype.kriegdata$Home$$changeNodes$1__Lorg_scalajs_dom_raw_Node__V = (function(n) {
-  x: {
-    _changeNodes: while (true) {
-      if ((n !== null)) {
-        var this$1 = this.rand$1;
-        var this$2 = this$1.self$1;
-        var r = this$2.next__I__I(32);
-        if ((((r % 7) === 0) || ((r % 11) === 0))) {
-          var parent = n["parentNode"];
-          parent["removeChild"](n);
-          parent["appendChild"](this.kriegdata$Home$$newNode$1__Lorg_scalajs_dom_raw_Element())
-        };
-        n = n["nextSibling"];
-        continue _changeNodes
-      };
-      break x
-    }
-  }
-});
-$c_Lkriegdata_Home$.prototype.kriegdata$Home$$newNode$1__Lorg_scalajs_dom_raw_Element = (function() {
-  var returnVal = $g["document"]["createElement"]("div");
-  returnVal["setAttribute"]("class", "one box eighths");
-  var this$2 = new $c_sci_StringOps().init___T("background-color: %s;");
-  var array = [this.please__T()];
-  var jsx$4 = $m_sjsr_RuntimeString$();
-  var jsx$3 = this$2.repr$1;
-  var this$4 = $m_sc_Seq$();
-  this$4.ReusableCBFInstance$2;
-  $m_sjs_js_WrappedArray$();
-  var array$1 = [];
-  $uI(array["length"]);
-  var i = 0;
-  var len = $uI(array["length"]);
-  while ((i < len)) {
-    var index = i;
-    var arg1 = array[index];
-    var elem = $s_sci_StringLike$class__unwrapArg__p0__sci_StringLike__O__O(this$2, arg1);
-    array$1["push"](elem);
-    i = ((1 + i) | 0)
-  };
-  var evidence$1 = $m_s_reflect_ClassTag$().AnyRef$1;
-  var result = evidence$1.newArray__I__O($uI(array$1["length"]));
-  var len$1 = $m_sr_ScalaRunTime$().array$undlength__O__I(result);
-  var i$1 = 0;
-  var j = 0;
-  var $$this$1 = $uI(array$1["length"]);
-  var $$this$2 = (($$this$1 < len$1) ? $$this$1 : len$1);
-  var that = $m_sr_ScalaRunTime$().array$undlength__O__I(result);
-  var end = (($$this$2 < that) ? $$this$2 : that);
-  while ((i$1 < end)) {
-    var jsx$2 = $m_sr_ScalaRunTime$();
-    var jsx$1 = j;
-    var index$1 = i$1;
-    jsx$2.array$undupdate__O__I__O__V(result, jsx$1, array$1[index$1]);
-    i$1 = ((1 + i$1) | 0);
-    j = ((1 + j) | 0)
-  };
-  returnVal["setAttribute"]("style", jsx$4.format__T__AO__T(jsx$3, $asArrayOf_O(result, 1)));
+$c_Lkriegdata_Home$.prototype.newNode__Lorg_scalajs_jquery_JQuery = (function() {
+  var returnVal = (0, $g["jQuery"])("<div/>");
+  returnVal["addClass"]("col-lg-1 well-lg cell tada");
+  var color = this.please__T();
+  returnVal["css"]("background-color", color);
   return returnVal
 });
-$c_Lkriegdata_Home$.prototype.main__V = (function() {
-  $g["document"]["body"]["style"]["backgroundColor"] = this.please__T();
-  this.fillPlayground__V();
-  $g["window"]["setTimeout"]((function(f) {
-    return (function() {
-      return f.apply__O()
-    })
-  })(this.doRedraw__F0()), 100.0)
-});
-$c_Lkriegdata_Home$.prototype.fillPlayground__V = (function() {
-  var playgroundRows = $g["document"]["getElementById"]("playground")["getElementsByClassName"]("row");
-  var end = $uI(playgroundRows["length"]);
-  var isEmpty$4 = (end <= 0);
-  var numRangeElements$4 = (isEmpty$4 ? 0 : end);
-  var lastElement$4 = (isEmpty$4 ? (-1) : (((-1) + end) | 0));
-  var terminalElement$4 = ((1 + lastElement$4) | 0);
-  if ((numRangeElements$4 < 0)) {
-    $m_sci_Range$().scala$collection$immutable$Range$$fail__I__I__I__Z__sr_Nothing$(0, end, 1, false)
-  };
-  var i = 0;
-  var count = 0;
-  while ((i !== terminalElement$4)) {
-    var row = i;
-    if ($uZ(playgroundRows[row]["hasChildNodes"]())) {
-      $m_Lkriegdata_Home$().kriegdata$Home$$changeNodes$1__Lorg_scalajs_dom_raw_Node__V(playgroundRows[row]["firstChild"])
-    } else {
-      var i$1 = 0;
-      var count$1 = 0;
-      while ((i$1 !== 16)) {
-        var arg1 = i$1;
-        playgroundRows[row]["appendChild"]($m_Lkriegdata_Home$().kriegdata$Home$$newNode$1__Lorg_scalajs_dom_raw_Element());
-        count$1 = ((1 + count$1) | 0);
-        i$1 = ((1 + i$1) | 0)
-      }
+$c_Lkriegdata_Home$.prototype.drawRow__sjs_js_Any__Lorg_scalajs_dom_raw_Element__sjs_js_Any = (function(index, thiz) {
+  if (($uI((0, $g["jQuery"])(thiz)["children"]()["length"]) >= this.COLS$1)) {
+    return (0, $g["jQuery"])(thiz)["children"](".cell")["each"]((function(index$2, thiz$2) {
+      return $m_Lkriegdata_Home$().maybeChangeColor__sjs_js_Any__Lorg_scalajs_dom_raw_Element__sjs_js_Any(index$2, thiz$2)
+    }))
+  } else {
+    var end = this.COLS$1;
+    var isEmpty$4 = (end <= 0);
+    var numRangeElements$4 = (isEmpty$4 ? 0 : end);
+    var lastElement$4 = (isEmpty$4 ? (-1) : (((-1) + end) | 0));
+    var terminalElement$4 = ((1 + lastElement$4) | 0);
+    if ((numRangeElements$4 < 0)) {
+      $m_sci_Range$().scala$collection$immutable$Range$$fail__I__I__I__Z__sr_Nothing$(0, end, 1, false)
     };
-    count = ((1 + count) | 0);
-    i = ((1 + i) | 0)
+    var i = 0;
+    var count = 0;
+    while ((i !== terminalElement$4)) {
+      var arg1 = i;
+      (0, $g["jQuery"])(thiz)["append"]($m_Lkriegdata_Home$().newNode__Lorg_scalajs_jquery_JQuery());
+      count = ((1 + count) | 0);
+      i = ((1 + i) | 0)
+    };
+    var value = (void 0);
+    return value
   }
 });
+$c_Lkriegdata_Home$.prototype.fillPlayground__Lorg_scalajs_jquery_JQuery = (function() {
+  var playgroundRows = (0, $g["jQuery"])("#playground")["children"](".row");
+  return playgroundRows["each"]((function(index$2, thiz$2) {
+    return $m_Lkriegdata_Home$().drawRow__sjs_js_Any__Lorg_scalajs_dom_raw_Element__sjs_js_Any(index$2, thiz$2)
+  }))
+});
+$c_Lkriegdata_Home$.prototype.main__V = (function() {
+  var jsx$1 = (0, $g["jQuery"])($g["document"]["body"]);
+  var s = this.please__T();
+  jsx$1["css"]("background-color", s);
+  var jsx$2 = (0, $g["jQuery"])(".jumbotron");
+  var s$1 = this.please__T();
+  jsx$2["css"]("background-color", s$1);
+  $g["setInterval"]((function() {
+    return $m_Lkriegdata_Home$().fillPlayground__Lorg_scalajs_jquery_JQuery()
+  }), 100.0)
+});
+$c_Lkriegdata_Home$.prototype.please__T__T = (function(base) {
+  var jsx$2 = $g["Please"];
+  var obj = {};
+  obj["base_color"] = base;
+  var jsx$1 = jsx$2["make_color"](obj);
+  return $objectToString(jsx$1)
+});
+$c_Lkriegdata_Home$.prototype.maybeChangeColor__sjs_js_Any__Lorg_scalajs_dom_raw_Element__sjs_js_Any = (function(index, thiz) {
+  var this$1 = this.rand$1;
+  var this$2 = this$1.self$1;
+  var thisRand = this$2.next__I__I(32);
+  if ((((thisRand % 7) === 0) || ((thisRand % 11) === 0))) {
+    var qual$1 = (0, $g["jQuery"])(thiz);
+    var obj = {};
+    var y = this.please__T();
+    obj["background-color"] = y;
+    qual$1["animate"](obj, "slow")
+  };
+  return index
+});
 $c_Lkriegdata_Home$.prototype.please__T = (function() {
-  return $objectToString($g["Please"]["make_color"]())
+  var base = this.getBaseColor__T();
+  return this.please__T__T(base)
 });
 $c_Lkriegdata_Home$.prototype.$$js$exported$meth$main__O = (function() {
   this.main__V()
@@ -3194,10 +3162,6 @@ var $h_ju_Random = (function() {
   /*<skip>*/
 });
 $h_ju_Random.prototype = $c_ju_Random.prototype;
-$c_ju_Random.prototype.init___ = (function() {
-  $c_ju_Random.prototype.init___J.call(this, $m_ju_Random$().java$util$Random$$randomSeed__J());
-  return this
-});
 $c_ju_Random.prototype.init___J = (function(seed_in) {
   this.haveNextNextGaussian$1 = false;
   this.setSeed__J__V(seed_in);
@@ -3417,20 +3381,6 @@ var $d_sci_List$$anon$1 = new $ClassTypeData({
   F1: 1
 });
 $c_sci_List$$anon$1.prototype.$classData = $d_sci_List$$anon$1;
-/** @constructor */
-var $c_sr_AbstractFunction0 = (function() {
-  $c_O.call(this)
-});
-$c_sr_AbstractFunction0.prototype = new $h_O();
-$c_sr_AbstractFunction0.prototype.constructor = $c_sr_AbstractFunction0;
-/** @constructor */
-var $h_sr_AbstractFunction0 = (function() {
-  /*<skip>*/
-});
-$h_sr_AbstractFunction0.prototype = $c_sr_AbstractFunction0.prototype;
-$c_sr_AbstractFunction0.prototype.toString__T = (function() {
-  return "<function0>"
-});
 /** @constructor */
 var $c_sr_AbstractFunction1 = (function() {
   $c_O.call(this)
@@ -4070,40 +4020,6 @@ var $d_ju_Formatter = new $ClassTypeData({
 });
 $c_ju_Formatter.prototype.$classData = $d_ju_Formatter;
 /** @constructor */
-var $c_ju_Random$ = (function() {
-  $c_O.call(this)
-});
-$c_ju_Random$.prototype = new $h_O();
-$c_ju_Random$.prototype.constructor = $c_ju_Random$;
-/** @constructor */
-var $h_ju_Random$ = (function() {
-  /*<skip>*/
-});
-$h_ju_Random$.prototype = $c_ju_Random$.prototype;
-$c_ju_Random$.prototype.java$util$Random$$randomSeed__J = (function() {
-  return new $c_sjsr_RuntimeLong().init___I(this.randomInt__p1__I()).$$less$less__I__sjsr_RuntimeLong(32).$$bar__sjsr_RuntimeLong__sjsr_RuntimeLong(new $c_sjsr_RuntimeLong().init___I__I__I(4194303, 1023, 0).$$amp__sjsr_RuntimeLong__sjsr_RuntimeLong(new $c_sjsr_RuntimeLong().init___I(this.randomInt__p1__I())))
-});
-$c_ju_Random$.prototype.randomInt__p1__I = (function() {
-  var a = (4.294967296E9 * $uD($g["Math"]["random"]()));
-  return (((-2.147483648E9) + $uD($g["Math"]["floor"](a))) | 0)
-});
-var $d_ju_Random$ = new $ClassTypeData({
-  ju_Random$: 0
-}, false, "java.util.Random$", {
-  ju_Random$: 1,
-  O: 1,
-  s_Serializable: 1,
-  Ljava_io_Serializable: 1
-});
-$c_ju_Random$.prototype.$classData = $d_ju_Random$;
-var $n_ju_Random$ = (void 0);
-var $m_ju_Random$ = (function() {
-  if ((!$n_ju_Random$)) {
-    $n_ju_Random$ = new $c_ju_Random$().init___()
-  };
-  return $n_ju_Random$
-});
-/** @constructor */
 var $c_s_Console$ = (function() {
   $c_s_DeprecatedConsole.call(this);
   this.outVar$2 = null;
@@ -4611,8 +4527,8 @@ var $h_s_util_Random = (function() {
   /*<skip>*/
 });
 $h_s_util_Random.prototype = $c_s_util_Random.prototype;
-$c_s_util_Random.prototype.init___ = (function() {
-  $c_s_util_Random.prototype.init___ju_Random.call(this, new $c_ju_Random().init___());
+$c_s_util_Random.prototype.init___J = (function(seed) {
+  $c_s_util_Random.prototype.init___ju_Random.call(this, new $c_ju_Random().init___J(seed));
   return this
 });
 $c_s_util_Random.prototype.init___ju_Random = (function(self) {
@@ -4898,34 +4814,6 @@ var $m_scm_StringBuilder$ = (function() {
   };
   return $n_scm_StringBuilder$
 });
-/** @constructor */
-var $c_sjsr_AnonFunction0 = (function() {
-  $c_sr_AbstractFunction0.call(this);
-  this.f$2 = null
-});
-$c_sjsr_AnonFunction0.prototype = new $h_sr_AbstractFunction0();
-$c_sjsr_AnonFunction0.prototype.constructor = $c_sjsr_AnonFunction0;
-/** @constructor */
-var $h_sjsr_AnonFunction0 = (function() {
-  /*<skip>*/
-});
-$h_sjsr_AnonFunction0.prototype = $c_sjsr_AnonFunction0.prototype;
-$c_sjsr_AnonFunction0.prototype.apply__O = (function() {
-  return (0, this.f$2)()
-});
-$c_sjsr_AnonFunction0.prototype.init___sjs_js_Function0 = (function(f) {
-  this.f$2 = f;
-  return this
-});
-var $d_sjsr_AnonFunction0 = new $ClassTypeData({
-  sjsr_AnonFunction0: 0
-}, false, "scala.scalajs.runtime.AnonFunction0", {
-  sjsr_AnonFunction0: 1,
-  sr_AbstractFunction0: 1,
-  O: 1,
-  F0: 1
-});
-$c_sjsr_AnonFunction0.prototype.$classData = $d_sjsr_AnonFunction0;
 /** @constructor */
 var $c_sjsr_AnonFunction1 = (function() {
   $c_sr_AbstractFunction1.call(this);
